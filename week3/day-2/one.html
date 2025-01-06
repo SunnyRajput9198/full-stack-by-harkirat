@@ -1,0 +1,36 @@
+<!-- static HTML represents HTML that does not change -->
+ <!-- # means id  -->
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width">
+	  <title>replit</title>
+	  <link href="style.css" rel="stylesheet" type="text/css" />
+	</head>
+    <style>
+        #bd{
+            
+            background-color: aqua;
+        }
+        .toto{
+            font-family: fantasy;
+        }
+    </style>
+	
+	<body>
+	  <h1>Todo list</h1>
+	  <h4 class="toto">1. Take class</h4>
+	  <h4 class="toto">2. Go out to eat</h4>
+	  <div>
+	    <input type="text" placeholder="add your todo here"></input>
+	    <button id="bd" onclick="addtodo()">Add Todo</button>
+	  </div>
+	  <script src="one.js"></script>
+	</body>
+	
+</html>
+
+<!-- The DOM abstracts the structure of the document into a tree of objects,
+  allowing scripts to manipulate the content and structure dynamically.
+   This abstraction enables more complex interactions and functionalities beyond just static HTML. -->

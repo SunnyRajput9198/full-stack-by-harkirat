@@ -1,0 +1,48 @@
+*{
+    
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    
+}
+
+body{
+    background-color: #0D1117;
+}
+
+/*==greet
+https://flexboxfroggy.com//practise from here flex
+display:greet; 
+grid-trmplate-columns:1fr 2fr
+gap:10px
+ */
+
+.toplink{
+    color: rgb(114, 114, 114);
+    cursor: pointer;
+    padding-right: 2px;
+    font-size: 1.1em;
+    margin-top:1rem;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+.box{
+    box-sizing:border-box;
+    padding: 1em;
+    background-color:#0078d4;
+    font-weight:700;
+    font-size: large;
+    color: white;
+    border-radius: 0.35em;
+    margin-right: 0.7em;
+}
+.box2{
+    box-sizing:border-box;
+    padding: 1em;
+    background-color: #25292E;
+    font-weight:700;
+    font-size: large;
+    color: white;
+    border-radius: 0.35em
+}
+.hero{
+    border-radius: 12px;
+}

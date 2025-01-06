@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <input type="text" />
+    <button onclick="addtodo()">Add todo</button>
+  </body>
+  <script>
+    
+    function deletetodo(index) {
+      const newel = document.getElementById(index);
+      newel.parentNode.removeChild(newel);
+    }
+
+    function addtodo() {
+      const value = document.querySelector("input").value;
+
+      const spanel=document.createElement("span");
+      const buttonel=document.createElement("button");
+      spanel.innerHTML=value;
+      buttonel.innerHTML="delete"
+      //here we have created a span
+      // and a button and we are appending span and button to the div
+
+      const divel=document.createElement("div");
+      divel.appendChild(spanel);
+      divel.appendChild(buttonel);
+      document.querySelector("body").appendChild(divel);
+      
+    }
+  </script>
+</html>

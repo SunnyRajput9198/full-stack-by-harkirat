@@ -1,0 +1,29 @@
+<head>
+    <body>
+        <input id= "a" type="text" placeholder="First value"></input>
+        <input id= "b" type="text" placeholder="Second value"></input>
+
+        <button onclick="sendrequest()">Find sum</button>
+    </body>
+    <!-- axios library use kiya hai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+    <script>
+        function sendrequest(){
+            const a=document.getElementById("a").value
+            const b=document.getElementById("b").value
+        
+            //ispe request nii ja rhi hai it is blocked by cors
+            axios.post("http://localhost:3000/sum",{
+                a:a,b:b
+            })
+        }
+    </script>
+</head>
+<!-- is file me aes ho rha hai -->
+<!-- //if hmko is file ko open krnma hai server aaaega uspe ctrl+click krdo-->
+ <!-- phir ye request bhehega jo ki mention hai upr ar vo request blocked by cors -->
+ <!-- npx serve->serves  a folder over http -->
+
+
+<!-- if hmko ek laptp se doosre mw transfer krna hai use npx serve uske network me jake jo  vo khud ega -->
+<!-- npx serve->serves  a folder over http -->
