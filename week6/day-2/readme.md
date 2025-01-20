@@ -1,0 +1,2 @@
+token-> with the key you can encrypt the meesage into a  token and it can only be decoded with the help of key
+jwt-> with the help of secret you can encode the meesage into a jwt and it can  be decoded by anyone but can only be verified with the help of secret
