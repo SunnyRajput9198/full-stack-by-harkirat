@@ -1,7 +1,8 @@
 const express=require("express")
 const Router=express.Router
 const jwt=require("jsonwebtoken")
-const jwtuserSecret="areudmjt"
+const {jwtuserSecret}=require("../config")
+const {userMiddleware}=require("../middleware/user")
 
 const userRouter=Router()///kyuki router ek function hai to Router()
 const {userModel}=require("../db")
@@ -45,7 +46,7 @@ userRouter.post("/signup", async function (req, res) {
 //   "email":"sunny@gmail.com",
 //  "password":"12355"
 //  }
-userRouter.post("/signin", async function (req, res) {
+userRouter.post("/signin",userMiddleware, async function (req, res) {
     const {email, password} = req.body;
     //todo: ideally password hashed form me store hoga na ki plane text ne vo hash hua hoga to usko phle plain me kro phir usko hash krna hoga
     //if find krege to vo [] return krega if  pass not matched and if([]) is true token phir bhi dega vo in find
@@ -65,9 +66,26 @@ userRouter.post("/signin", async function (req, res) {
   })  
 
 
-  userRouter.get("/purchases", function (req, res) {
+  userRouter.get("/purchases", async function (req, res) {
+    const userId = req.userId;
+
+    const purchases = await purchaseModel.find({
+        userId,
+    });
+
+    let purchasedCourseIds = [];
+
+    for (let i = 0; i<purchases.length;i++){ 
+        purchasedCourseIds.push(purchases[i].courseId)
+    }
+//ye purchases course ko le rha hai
+    const coursesData = await courseModel.find({
+        _id: { $in: purchasedCourseIds }
+    })
+
     res.json({
-      message: "signin endpoint",
+        purchases,
+        coursesData
     })
   })
  

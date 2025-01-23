@@ -20,4 +20,8 @@ Frontend in React
 
 ## why differnet jwt token for user and admin
 
-admin jwt token is used to create a course, user jwt token is used to purchase a course
+- admin jwt token is used to create a course, user jwt token is used to purchase a course.
+- 
+## Enhanced Security:
+- Different tokens help to minimize security risks. If a user's token is compromised, it does not give access to admin functionalities.
+- This separation ensures that critical administrative actions are not exposed to regular users.

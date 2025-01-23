@@ -1,4 +1,6 @@
+require("dotenv").config();//to import env variables
 const express = require("express");
+
 const app = express();
 const mongoose = require("mongoose");
 const { courseRouter } = require("./routes/coures");
@@ -14,7 +16,7 @@ app.use("/admin",adminRouter)
 async function main() {
     
     console.log("connected to")
-    await mongoose.connect("mongodb+srv://rajputsny2:ond1rGQZUbhgLloI@cluster0.cbcsh.mongodb.net/coursera")
+    await mongoose.connect(process.env.MONGODB_URL)//process.env.MONGODB_URL is the env variable that is set in the .env file
     app.listen(3000);
 }
 main()
