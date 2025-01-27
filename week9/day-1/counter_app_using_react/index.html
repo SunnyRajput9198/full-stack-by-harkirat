@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+    <!-- Sets the title of the page -->
+    <title>Counter using Component & State </title>
+</head>
+<body>
+    <!-- Placeholder div where the button will be rendered -->
+    <div id="buttonParent"></div>
+
+    <script>
+        // Initializes state with a count of 0
+        // and a color of black
+        let state = { count: 0,color:"black" };
+
+        // Function to handle button press
+        function onButtonPress() {
+            // Increments the count by 1
+            state.count++;
+            // Changes the color to a random color
+            state.color=Math.random()<0.5?"red":"green";
+            // Re-renders the button
+            buttonComponentRerender();
+        }
+
+        // Function to update the UI
+        function buttonComponentRerender() {
+            // Clears the div
+            document.getElementById("buttonParent").innerHTML = "";
+            // Creates a new button with the updated count
+            // and color
+            const component = buttonComponent(state.count,state.color);
+            // Adds the button to the DOM
+            document.getElementById("buttonParent").appendChild(component);
+        }
+
+        // Function to create the button element
+        function buttonComponent(count) {
+            // Creates a button element
+            const button = document.createElement("button");
+            // Sets the button's text to display the current count
+            button.innerHTML = `Counter ${count}`;
+            // Adds an event listener to handle button clicks
+            // and calls the onButtonPress function
+            // when the button is clicked
+            
+            button.setAttribute("onclick", "onButtonPress()");
+            button.setAttribute("style","background-color:"+state.color);
+            // Returns the button element
+            return button;
+        }
+
+        // Initial render of the button
+        buttonComponentRerender(); 
+    </script>
+</body>
+</html>
