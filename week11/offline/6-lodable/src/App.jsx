@@ -21,6 +21,19 @@ function App() {
 function Todo({id}) {
   // Use Recoil's useRecoilValueLoadable hook to get the state of the todo atom
   const todo = useRecoilValueLoadable(todosAtomFamily(id));
+  //useRecoilValue hook produced state and contents
+  //example->
+  // function UserInfo({userID}) {
+  //   const [userNameLoadable, setUserName] = useRecoilStateLoadable(userNameQuery(userID));
+  //   switch (userNameLoadable.state) {
+  //     case 'hasValue':
+  //       return <div>{userNameLoadable.contents}</div>;
+  //     case 'loading':
+  //       return <div>Loading...</div>;
+  //     case 'hasError':
+  //       throw userNameLoadable.contents;
+  //   }
+  // }
   
   // Check the state of the todo atom and handle different loading states
   if (todo.state === 'loading') {
