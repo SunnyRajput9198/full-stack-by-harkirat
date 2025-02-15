@@ -54,5 +54,13 @@ let b:Baduser={
 let u1:User1={
     name:"harkirat",
     gift:"chocolate",
-    ip:"127.0.0.1"
+
 }
+
+// //1. Intersection Types (&)
+// ✅ Combines multiple types into one big type
+// ✅ The result must have all properties from all types
+
+// //2. Union Types (|)
+// ✅ Allows the value to be one type OR another type
+// ✅ Can have only the properties of one of the types at a time
