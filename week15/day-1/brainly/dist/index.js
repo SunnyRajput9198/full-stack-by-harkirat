@@ -30,6 +30,11 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json()); // Middleware to parse JSON request bodies.//to parse the body
 app.use((0, cors_1.default)()); // Middleware to allow cross-origin requests.
 // Route 1: User Signup
+//{
+//     "username":"sunnyrajputiji",
+//     "password":"123456"
+//    }
+// http://localhost:3000/api/v1/signup
 app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // TODO: Use zod or a similar library for input validation.
     // TODO: Hash the password before storing it in the database.
@@ -46,6 +51,12 @@ app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 // Route 2: User Signin
+// {
+//     "username":"sunnyrajputiji",
+//     "password":"123456"
+//    }
+// http://localhost:3000/api/v1/signin
+//it returns a token
 app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const password = req.body.password;
@@ -53,6 +64,7 @@ app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
     const existingUser = yield db_1.UserModel.findOne({ username, password });
     if (existingUser) {
         // Generate a JWT token with the user's ID.
+        //yha pr ye _id user ki object_id hai
         const token = jsonwebtoken_1.default.sign({ id: existingUser._id }, middleware_1.jwt_secret);
         res.json({ token }); // Send the token in response.
     }
@@ -62,6 +74,12 @@ app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 // Route 3: Add Content
+// {
+//     "title":"notion doc",
+//     "link":"sunnygmail"
+//    }
+// http://localhost:3000/api/v1/content
+// headers me Authorization: token-- add krna hai jo ki signin ki request pr mila hai
 app.post("/api/v1/content", middleware_1.userMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { link, type, title } = req.body;
     // Create a new content entry linked to the logged-in user.
@@ -76,6 +94,7 @@ app.post("/api/v1/content", middleware_1.userMiddleware, (req, res) => __awaiter
     res.json({ message: "Content added" }); // Send success response.
 }));
 // Route 4: Get User Content
+//yha pe bs get krna hai baki sare cridentials same hai 
 app.get("/api/v1/content", middleware_1.userMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //@ts-ignore
     const userId = req.userId; // User ID is fetched from middleware
@@ -83,11 +102,12 @@ app.get("/api/v1/content", middleware_1.userMiddleware, (req, res) => __awaiter(
     // The `populate` function is used to include additional details from the referenced `userId`.
     // For example, it will fetch the username linked to the userId.
     // Since we specified "username", only the username will be included in the result, 
-    // and other details like password won’t be fetched.
+    // and other details like password won’t be fetched. if hm only userId dalte to vo pura user collection fetch kr deta
     const content = yield db_1.ContentModel.find({ userId: userId }).populate("userId", "username");
-    res.json(content); // Send the content as response
+    res.json(content); // Send the content as response jo ki datatbase me bna hai
 }));
-// Route 5: Delete User Content
+// Route 5: Delete User Content sare cridentials same hai
+//yha pe kuch nii kran delete selct kran hai postman me
 app.delete("/api/v1/content", middleware_1.userMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const contentId = req.body.contentId;
     // Delete content based on contentId and userId.

@@ -117,6 +117,12 @@ app.delete("/api/v1/content", userMiddleware, async (req, res) => {
 });
 
 // Route 6: Share Content Link
+
+// {
+//     "share":true
+//      }
+// http://localhost:3000/api/v1/brain/share
+// output-> {"hash":"rbvnetbdeu"}
 app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
     const { share } = req.body;
     if (share) {
@@ -142,11 +148,16 @@ app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
 });
 
 // Route 7: Get Shared Content
+// params me jake-->
+// query params me hash likho
+// phir path variable me hashed link likho
+//ar baki khi likhne ki jrurat nii
+//if params ne nii krna hai to directlr get request bhej do hash pe http://localhost:3000/api/v1/brain/rbvnetbdeu
 app.get("/api/v1/brain/:shareLink", async (req, res) => {
     const hash = req.params.shareLink;
 
     // Find the link using the provided hash.
-    const link = await LinkModel.findOne({ hash });
+    const link = await LinkModel.findOne({ hash });// await it because it ia a  database call
     if (!link) {
         res.status(404).json({ message: "Invalid share link" }); // Send error if not found.
         return;
@@ -166,6 +177,11 @@ app.get("/api/v1/brain/:shareLink", async (req, res) => {
         content
     }); // Send user and content details in response.
 });
+// //Why Only params Here?
+// Route-Specific Data: The purpose of this endpoint is to process a specific shareable link identified by the :shareLink parameter in the URL. Hence, req.params is used to extract this unique identifier from the URL.
+// Other Sources:
+// Query Parameters (req.query): These are typically used for optional data that modifies or filters the request. For example, /api/v1/brain?sort=asc. This wasn't needed in your case.
+// Body Data (req.body): Generally used for POST/PUT requests to send data to the server. This is not relevant for a GET request which is meant to fetch data.
 
 // Start the server
 app.listen(3000);
