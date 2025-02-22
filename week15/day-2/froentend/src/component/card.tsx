@@ -41,16 +41,13 @@ export function Card({ title, link, type }: CardProps) {
                 <div className="pt-4">
                     {/* Render YouTube embed if type is "youtube" usme link se bhut try kiya lekin nii ho rha hai isliye direct embed krdo link me kuch bhi pass krdo */}
                     {type === "youtube" && (
-                        <iframe  className ="w-full" width="560" height="315" src="https://www.youtube.com/embed/FZLadzn5i6Q?si=2wh3DZ9SaUB00cs8" 
-                        title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                        <iframe className="w-full" width="560" height="315" src={link.replace("watch?v=", "embed/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     )}
 
                     {/* Render Twitter embed if type is "twitter" */}
-                    {type === "twitter" && (
-                        <blockquote className="twitter-tweet">
+                    {type === "twitter" && ( <blockquote className="twitter-tweet">
                             <a href={link.replace("x.com", "twitter.com")}></a>
-                        </blockquote>
+                        </blockquote> 
                     )}
                 </div>
             </div>
