@@ -1,17 +1,23 @@
 
 import './App.css'
+import { useState } from 'react'
 import { Button } from './component/button'
 import { ShareIcon } from './icons/shareicon'
 import { PlusIcon } from './icons/plusicon'
 import { Card } from './component/card'
+import { CreateContentModal } from './component/createcomponent'
+
 
 function App() {
 
+  const [modalOpen, setModalOpen] = useState(false);
+  return <div className='p-4 ml-72'>
+      <CreateContentModal open={modalOpen} onClose={() => {
+        setModalOpen(false);
+      }} />
 
-  return (
-    <div className='p-4'>
       <div className='flex gap-4 justify-end'>
-        <Button variant="primary" text="Add content" startIcon={<PlusIcon />} ></Button>
+        <Button onClick={()=>{setModalOpen(true)}} variant="primary" text="Add content" startIcon={<PlusIcon />} ></Button>
         <Button variant="secondary" text="share Brain" startIcon={<ShareIcon />} />
       </div>
       <div className='flex gap-4'>
@@ -21,7 +27,7 @@ function App() {
         <Card type='twitter' title="Brain" link="https://x.com/akshar2026/status/1892861808857211063/photo/1" />
       </div>
     </div>
-  )
+  
 }
 
 export default App
