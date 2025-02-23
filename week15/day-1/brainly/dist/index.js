@@ -20,7 +20,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //tsc-b-> to compile ts to js
 const express_1 = __importDefault(require("express"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken")); //npm install @types/jsonwebtoken
-const cors_1 = __importDefault(require("cors"));
+const cors_1 = __importDefault(require("cors")); //npm install cors @types/cors
 const utils_1 = require("./utils"); //import kro
 const middleware_1 = require("./middleware");
 const db_1 = require("./db");
@@ -116,6 +116,11 @@ app.delete("/api/v1/content", middleware_1.userMiddleware, (req, res) => __await
     res.json({ message: "Deleted" }); // Send success response.
 }));
 // Route 6: Share Content Link
+// {
+//     "share":true
+//      }
+// http://localhost:3000/api/v1/brain/share
+// output-> {"hash":"rbvnetbdeu"}
 app.post("/api/v1/brain/share", middleware_1.userMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { share } = req.body;
     if (share) {
@@ -140,10 +145,15 @@ app.post("/api/v1/brain/share", middleware_1.userMiddleware, (req, res) => __awa
     }
 }));
 // Route 7: Get Shared Content
+// params me jake-->
+// query params me hash likho
+// phir path variable me hashed link likho
+//ar baki khi likhne ki jrurat nii
+//if params ne nii krna hai to directlr get request bhej do hash pe http://localhost:3000/api/v1/brain/rbvnetbdeu
 app.get("/api/v1/brain/:shareLink", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const hash = req.params.shareLink;
     // Find the link using the provided hash.
-    const link = yield db_1.LinkModel.findOne({ hash });
+    const link = yield db_1.LinkModel.findOne({ hash }); // await it because it ia a  database call
     if (!link) {
         res.status(404).json({ message: "Invalid share link" }); // Send error if not found.
         return;
@@ -160,5 +170,10 @@ app.get("/api/v1/brain/:shareLink", (req, res) => __awaiter(void 0, void 0, void
         content
     }); // Send user and content details in response.
 }));
+// //Why Only params Here?
+// Route-Specific Data: The purpose of this endpoint is to process a specific shareable link identified by the :shareLink parameter in the URL. Hence, req.params is used to extract this unique identifier from the URL.
+// Other Sources:
+// Query Parameters (req.query): These are typically used for optional data that modifies or filters the request. For example, /api/v1/brain?sort=asc. This wasn't needed in your case.
+// Body Data (req.body): Generally used for POST/PUT requests to send data to the server. This is not relevant for a GET request which is meant to fetch data.
 // Start the server
 app.listen(3000);

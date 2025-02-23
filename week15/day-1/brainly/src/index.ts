@@ -7,7 +7,7 @@
 import express from "express"
 import moongoose from "mongoose"//npm install mongoose
 import jwt from "jsonwebtoken"//npm install @types/jsonwebtoken
-import cors from "cors";
+import cors from "cors";//npm install cors @types/cors
 import { random } from "./utils";//import kro
 import { userMiddleware ,jwt_secret} from "./middleware";
 import { UserModel, ContentModel,LinkModel } from "./db";

@@ -18,6 +18,7 @@ export const UserModel=model("User",userSchema);
 const contentSchema=new Schema({
     title:{type:String,required:true},
     link:{type:String,required:true},
+    type:{type:String},
     tags:[{type:mongoose.Types.ObjectId,ref:"tag"}], // Array of tag IDs, referencing the 'tag' collection
     userId:{type:mongoose.Types.ObjectId,ref:"User",required:true}, // The 'userId' field is mandatory to link content to a user
 })
