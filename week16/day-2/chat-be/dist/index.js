@@ -18,14 +18,26 @@ wss.on("connection", (socket) => {
         // @ts-ignore is used to bypass TypeScript type checking for the JSON.parse
         const parsedMessage = JSON.parse(message);
         // Handle 'join' message type - when a user wants to join a room
+        // {
+        //     "type": "join",
+        //     "payload": {
+        //       "roomId": "123"
+        //     }
+        //  }
         if (parsedMessage.type === "join") {
             // Add the new user to allSockets array with their socket and requested room
             allSockets.push({
                 socket,
-                room: parsedMessage.payload.roomId // parsemessage is  a object parsedMessage.payload.roomId is a string user ki information hai
+                room: parsedMessage.payload.roomId, // parsemessage is  a object parsedMessage.payload.roomId is a string user ki information hai
             });
         }
         // Handle 'chat' message type - when a user sends a chat message
+        //{
+        // "type": "chat",
+        // "payload": {
+        // 	"message": "hi there"
+        // }
+        // }
         if (parsedMessage.type === "chat") {
             // const currentUserRoom = allSockets.find(user => user.socket === socket).room;
             // OR
