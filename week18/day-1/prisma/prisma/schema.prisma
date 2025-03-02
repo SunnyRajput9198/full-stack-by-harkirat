@@ -1,0 +1,52 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+// npx prisma generate --> in terminal to generate prisma client
+
+//npx prisma migrate dev --> in terminal
+// @id means primary key
+// @unique means unique
+// ?means optional it can be null
+// @default(autoincrement()) means auto increment
+// @default(now()) means current date and time se chalu hogi purani valuea me nii hoga to bhi chalega
+
+model users {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  city      String?
+  tods      tod[]   // Establishes a one-to-many relationship with the 'Tod' model.
+}
+// Defines the 'Tod' model, which maps to another database table.
+model tod{
+  id      Int      @id @default(autoincrement())
+  title   String
+  description String
+  done  Boolean
+  UserId Int
+  date DateTime @default(now())
+  user users @relation(fields: [UserId], references: [id])   // Defines the relationship to the 'User' model, linking 'userId' to the 'id' in 'User'.
+}
+
+/* Notes:
+  1. When you run `npx prisma init`, this schema file is automatically created. 
+     - You need to configure the database URL in the `.env` file to connect to your database.
+  
+  2. The schema acts as a blueprint for defining the structure of your database tables (documentation-style declaration).
+
+  3. After defining your schema, run `npx prisma migrate dev` to create migration files.
+     - This generates a migration file and automatically applies it to your database, creating tables that match the schema.
+
+  4. Anytime you make changes to the schema (e.g., adding, modifying fields), you must run `npx prisma migrate dev` again.
+     - This keeps the database schema in sync with your Prisma schema.
+
+  5. After setting up your models, generate the Prisma client by running `npx prisma generate`.
+     - This creates the client in your `node_modules` directory, which you can use in your code to interact with the database.
+*/
