@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 
+
+// isme  hm log signup pe click krege then usko signup krege or dekehege neon pe gya hai ki nii if gya okk
 export default function Home() {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-black text-gray-100">
