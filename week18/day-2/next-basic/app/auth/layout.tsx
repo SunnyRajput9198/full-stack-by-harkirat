@@ -1,9 +1,11 @@
 
 import {Navbar} from "../component/navbar";
 
-export default function AuthLayout({childern}){
+export default function AuthLayout({children}: Readonly<{
+    children: React.ReactNode;
+  }>){
     return <div>
         <Navbar/>
-        {childern}
+        {children}
     </div>
 }
