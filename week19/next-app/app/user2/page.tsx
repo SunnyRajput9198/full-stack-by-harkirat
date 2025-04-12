@@ -5,6 +5,7 @@ export default async function User2() {
 
         // Adding a delay of 5 seconds to simulate a loader effect
     // Useful when we want to display a loading spinner on the page
+    // if gogle crawler hit it it will not show the spinner it show request status pemding and after 5 seconds it will show the data
     await new Promise((r) => setTimeout(r, 5000));
 
        const user = res.data

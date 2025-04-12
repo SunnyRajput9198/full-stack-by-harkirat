@@ -1,5 +1,6 @@
 "use client";// since this is a client component, we need to wrap it in the client directive 
 // and here we are using usestate hook and useEffect hook
+//since by default it is a server component as server component cannot use usestate hook and useEffect hook
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -23,9 +24,11 @@ export default function User() {
  <div className="flex justify-center">
      <div className="border p-8 rounded">
          <div>
+            {/* @ts-ignore */}
              Name: {user?.name}
          </div>
-         
+            {/* @ts-ignore */}
+    
          {user?.email}
      </div>
  </div>
