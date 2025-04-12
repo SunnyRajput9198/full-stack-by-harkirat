@@ -170,10 +170,10 @@ export default BlogPage;
 ```
 
 ### 5. Optional Catch-All vs. Regular Catch-All
-| Feature                | `[...slug]`                   | `[[...slug]]`                |
-|------------------------|-------------------------------|------------------------------|
-| **Base Route Matching** | Does NOT match `/blog`        | Matches `/blog` (with `slug` as `undefined`). |
-| **Dynamic Segments**    | Matches one or more segments. | Matches zero or more segments. |
+| Feature                 | `[...slug]`                         | `[[...slug]]`                |
+|------------------------ |-------------------------------      |------------------------------|
+| **Base Route Matching** | Does NOT match `/blog`              | Matches `/blog` (with `slug` as `undefined`). |
+| **Dynamic Segments**    | Matches one or more segments.       | Matches zero or more segments. |
 | **Flexibility**         | Less flexible (requires a segment). | More flexible (segment optional). |
 
 ### 6. What is Static Site Generation (SSG) in Next.js?
@@ -192,3 +192,19 @@ Static Site Generation (SSG) is a feature in Next.js that allows you to pre-rend
 
 ### Hydration
 Hydration is the process by which a client-side JavaScript framework (such as React) takes over an already rendered HTML page and makes it interactive. In a Next.js application, pages are often server-rendered (SSR) or statically generated (SSG). The server sends a fully formed HTML document to the browser, allowing users to see meaningful content quickly (which is great for SEO and performance). Once the page arrives in the browser, React’s JavaScript bundle “hydrates” that static HTML by attaching event listeners and other interactive behaviors so that the page becomes a fully functional React application.
+# define-> Hydration is the process where React attaches event listeners and state to the static HTML generated on the server, turning it into a fully interactive React application in the browser.
+## even a client component is server side rendered and a server component is server side rendered
+# here is the flow of a nextjs app hydration
+[ Next.js Server ]
+      |
+      | (renders HTML with count = 0)
+      ↓
+[ Browser Receives HTML ]
+      |
+      | (JS bundle loads & React starts hydration)
+      ↓
+[ React Hydrates HTML ]
+      |
+      | (adds event listeners & state logic)
+      ↓
+[ Interactive App Ready ]
