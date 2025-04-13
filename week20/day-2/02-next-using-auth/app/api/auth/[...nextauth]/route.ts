@@ -11,7 +11,8 @@ const handler = NextAuth({
           name: "Email",        //jo yaha likh rhe hia woh likha ayega front mai jaise iske liye ayega ki Sign in with email.
           credentials: {
             username: { label: "Username", type: "text", placeholder: "Type your username here !" },
-            password: { label: "Password", type: "password" }
+            password: { label: "Password", type: "password" },
+            email: { label: "Email", type: "email" ,placeholder: "Type your email here !" }
           },
           async authorize(credentials, req) {
             const username = credentials?.username;
@@ -23,8 +24,8 @@ const handler = NextAuth({
             //db request to check if the username and password are correct basically the authentication part!
             const user = { 
                 id: "1", 
-                name: "Rohan Dev Singh", 
-                email: "rohandev.rs@gmail.com" 
+                name:"sunny rajput", 
+                email: "rajputsunny@gmail.com",
             }
       
             if (user) {
