@@ -1,0 +1,7 @@
+{
+  "extends": "@repo/typescript-config/backends.json",//it is extending typescript-config ka backends.json file
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+  }
+}
